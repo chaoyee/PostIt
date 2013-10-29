@@ -1,0 +1,61 @@
+<div class='control-group'>
+  <% @post.categories.each do |cat| %>
+    <span class='badge'><%= link_to cat.name, category_path(cat) %></span>
+  <% end %>
+  <br/>
+  <span class='lead'><%= link_to @post.title, fix_url(@post.url) %></span>
+  <hr/>
+  <h5><%= @post.description %></h5>  
+</div>
+<hr/>
+<%= render 'shared/errors', obj: @comment %>
+
+<div class='control-group'>
+  <% if logged_in? %>
+      <%= form_for [@post, @comment] do |f| %>
+      <%= f.label 'Please leave a comment:' %>
+      <%= f.text_area :body, class: 'span4' %>
+      <br/>
+      <%= f.submit 'Create comment', class: 'btn btn-primary' %>
+    <% end %>
+  <% end %>
+</div>
+
+<h5>Comments:</h5>
+
+<% @post.reload.comments.each do |comment| %>
+  <div class='row'> 
+    <div class='span0 well text-center'>
+      <% if logged_in? %>
+        <%= link_to vote_post_comment_path(@post, comment, vote: 'true'), method: 'post', remote: true do %>
+          <i class='icon-arrow-up'></i>
+        <% end %>
+      <% end %>  
+      <br/>
+      <span id='comment_<%= comment.id %>_votes'><%= comment.total_votes %></span> votes
+      <br/>
+      <% if logged_in? %>
+        <%= link_to vote_post_comment_path(@post, comment, vote: 'false'), method: 'post', remote: true do %>
+          <i class='icon-arrow-down'></i>
+        <% end %>
+      <% end %>  
+    </div>
+    <div class='span8 well'>
+      <p>
+        <%= comment.body %>
+      </P>
+      <small>  
+        comment by <%= comment.creator.username %> at <%= display_datetime(comment.created_at) %>
+      </small>
+    </div >  
+  </div>
+<% end %>
+
+<span class="btn btn-primary btn-mini"><%= link_to 'Back', posts_path %></span>
+
+
+
+
+
+
+

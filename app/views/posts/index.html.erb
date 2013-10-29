@@ -1,0 +1,6 @@
+<h3>All Posts</h3>
+<hr>
+<% @posts.each do |post| %>
+  <%= render 'post', post: post %>
+<% end %>
+

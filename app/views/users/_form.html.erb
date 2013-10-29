@@ -1,0 +1,18 @@
+<div class='well'>
+  <%= form_for @user do |f| %>
+    <%= render 'shared/errors', obj: @user %>
+    <div class='control-group'>
+      <%= f.label :username %>
+      <%= f.text_field :username %>
+    </div>
+    <div class='control-group'>
+      <%= f.label :password %>
+      <%= f.text_field :password %>
+    </div>
+    <div class='control-group'>
+      <%= f.label :time_zone %>
+      <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %>
+    </div>
+    <%= f.submit @user.new_record? ? "Register" : "Update Profile", class: 'btn btn-success' %>
+  <% end %>  
+</div>

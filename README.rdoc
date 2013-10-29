@@ -1,0 +1,10 @@
+Postit! Web Application
+
+This is an little project for the "Rapid Prototyping with Ruby on Rails" course from Tealeaf Academy (http://gotealeaf.com)
+
+It is a mini posting system that allows people to post some interesting things or thoughts on it. The users can also can have comments to the post.  Besides, everybody can do a postive or negetive vote to both posts and comments. 
+
+The users who want to post, comment or vote must register to the system. 
+Only the user with admin role can manage the system such as creating categories.
+
+It's fun! Give it a try!

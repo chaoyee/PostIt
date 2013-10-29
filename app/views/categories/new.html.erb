@@ -1,0 +1,10 @@
+<h3>New Category</h3>
+
+<%= render 'shared/errors', obj: @category %>
+
+<%= form_for @category do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <br/>
+  <%= f.submit "Create Category", class: 'btn btn-primary' %>
+<% end %>

@@ -1,0 +1,7 @@
+<h3>Show Categories</h3>
+<span class='lead'><%= @category.name %></span>
+<hr>
+<% @category.posts.each do |post| %>
+  <%= render 'posts/post', post: post %>
+<% end %>
+<span class="btn btn-primary btn-mini"><%= link_to 'Back', posts_path %></span>

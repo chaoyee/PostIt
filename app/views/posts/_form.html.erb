@@ -1,0 +1,24 @@
+<%= render 'shared/errors', obj: @post %>
+
+<%= form_for @post do |f| %>
+  <div class='form-group'>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+    <br/>
+    <%= f.label :url %>
+    <%= f.text_field :url %>
+    <br/>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+    <br/>
+    <br/>
+  </div>
+  <%= f.label "Categories:" %>
+  <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name, {:prompt => true}) do |b| %>
+  <%#= f.collection_select(:category_ids, Category.all, :id, :name, {:prompt => true, :multiple => true}) do |b| %>
+    <%= b.label(class: 'checkbox inline') { b.check_box(class: 'checkbox') + b.text } %>
+  <% end %>  
+  <br/>
+  <br/>
+  <%= f.submit @post.new_record? ? "Create a new post" : "Edit a post", class: 'btn btn-primary' %>
+<% end %>
