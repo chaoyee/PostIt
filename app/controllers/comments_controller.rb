@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
   # end
 
   def create    
-    @post = Post.find(params[:post_id])
+    @post = Post.find_by(slug: params[:post_id])
     @comment = @post.comments.new(com_params)  # equals to:   @comment = Comment.new(com_params)
                                                #              @comment.post = @post
     @comment.creator = current_user            # or @post.creator  
