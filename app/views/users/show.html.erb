@@ -1,1 +1,33 @@
-<%= render 'form' %>
+<%#= render 'form' %>
+<p class='lead'><%= "Profile: #{@user.username}" %></p>
+<hr>
+<div class='well'>
+  <%= render 'shared/errors', obj: @user %>
+  <dl class='dl-horizontal'>
+    <dt>Username:</dt>
+    <dd><%= @user.username %></dd>
+    <dt>Time zone:</dt>
+    <dd><%= @user.time_zone.empty? ? '' : @user.time_zone %></dd>
+  <dl>  
+</div>
+
+<h5><%= "#{@user.username}'s Activity" %></h5>
+
+<ul class="nav nav-tabs">
+  <li class="<%= 'active' if params[:tab].nil? %>">
+    <%= link_to "Posts (#{@user.posts.size})", user_path(@user) %>
+  </li>
+  <li class="<%= 'active' if params[:tab] == 'comments' %>">
+    <%= link_to "Comments (#{@user.comments.size})", user_path(@user, tab: 'comments') %>
+  </li>
+</ul>
+
+<% if params[:tab].nil? %>
+  <% @user.posts.each do |post| %>
+    <%= render 'posts/post', post: post %>
+  <% end %>
+<% elsif params[:tab] == 'comments' %>
+  <% @user.comments.each do |comment| %>
+    <%= render 'comments/comment', comment: comment %>
+  <% end %>
+<% end %>

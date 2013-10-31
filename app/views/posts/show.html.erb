@@ -24,31 +24,7 @@
 <h5>Comments:</h5>
 
 <% @post.reload.comments.each do |comment| %>
-  <div class='row'> 
-    <div class='span0 well text-center'>
-      <% if logged_in? %>
-        <%= link_to vote_post_comment_path(@post, comment, vote: 'true'), method: 'post', remote: true do %>
-          <i class='icon-arrow-up'></i>
-        <% end %>
-      <% end %>  
-      <br/>
-      <span id='comment_<%= comment.id %>_votes'><%= comment.total_votes %></span> votes
-      <br/>
-      <% if logged_in? %>
-        <%= link_to vote_post_comment_path(@post, comment, vote: 'false'), method: 'post', remote: true do %>
-          <i class='icon-arrow-down'></i>
-        <% end %>
-      <% end %>  
-    </div>
-    <div class='span8 well'>
-      <p>
-        <%= comment.body %>
-      </P>
-      <small>  
-        comment by <%= comment.creator.username %> at <%= display_datetime(comment.created_at) %>
-      </small>
-    </div >  
-  </div>
+  <%= render 'comments/comment', comment: comment %>  
 <% end %>
 
 <span class="btn btn-primary btn-mini"><%= link_to 'Back', posts_path %></span>
